@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Chatterbot</h1>
+
+<div id="chatbox" >
+<p class="botText"><span>Bot : Welcome to Amicus.How may I help you?</span></p>
+</div>
+<div id="userInput">
+ <input id="textInput" type="text" name="msg" placeholder="Message">
+    <br>
+    <br>
+    <button class="button" type="submit" value="Send"> Send </button>
+</div>
+
+<script>
+function getBotResponse() {
+var rawText = $("#textInput").val();
+var userHtml = ' <p class="userText"><span>' + rawText + '</span></p>';
+$("#textInput").val("");
+$("#chatbox").append(userHtml);
+document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+$.get("/hello", { msg: rawText }).done(function(data) {
+var botHtml = '<p class="botText"><span>' + 'Bot : ' + data + '</span></p>';
+$("#chatbox").append(botHtml);
+document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+});
+}
+$("#textInput").keypress(function(e) {
+if(e.which == 13) {
+getBotResponse();
+}
+});
+$("#buttonInput").click(function() {
+getBotResponse();
+})
+</script>
+
+</body>
+</html>
