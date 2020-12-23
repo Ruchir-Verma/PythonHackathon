@@ -1,0 +1,5 @@
+flask==1.1.1
+chatterbot==1.0.0
+werkzeug==1.0.1
+chatterbot-corpus==1.2.0
+pytz==2019.1
